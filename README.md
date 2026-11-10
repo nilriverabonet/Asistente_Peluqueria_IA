@@ -1,6 +1,6 @@
 # Asistente Virtual para una Peluquería con IA (Google Gemini + Tkinter)
 
-Aplicación de escritorio en Python con interfaz gráfica (**Tkinter**) que actúa como asistente virtual de la **Peluquería Brillo Estelar**, respondiendo consultas sobre servicios, precios y horarios mediante la **API de Google Gemini** y el uso de contexto (*In-Context Learning*).
+Aplicación de escritorio en Python con interfaz gráfica (**Tkinter**) que actúa como asistente virtual de la **Peluquería Antigua Grecia**, respondiendo consultas sobre servicios, precios y horarios mediante la **API de Google Gemini** y el uso de contexto (*In-Context Learning*).
 
 ---
 

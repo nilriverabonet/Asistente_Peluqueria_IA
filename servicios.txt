@@ -1,19 +1,18 @@
-Bienvenido a Peluquería Brillo Estelar ✨
+Bienvenido a Peluquería Antigua Grecia 🏛️✨
 
 Servicios disponibles:
 
-- Corte de cabello: $15
+- Corte de cabello (Estilo Espartano / Clásico): $15
 - Tinte básico: $25
-- Tinte premium: $40
-- Peinado: $20
+- Tinte premium (Oro de Atenas): $40
+- Peinado (Trenzado Olímpico /Evento): $20
 - Lavado y secado: $10
-- Tratamiento capilar: $30
-- Barbería (afeitado y recorte): $18
+- Tratamiento capilar (Néctar del Olimpo): $30
+- Barbería (afeitado y recorte de barba griega): $18
 
 Horario de atención:
 - Lunes a Viernes: 9:00 AM - 7:00 PM
 - Sábado: 9:00 AM - 3:00 PM
 - Domingo: cerrado
 
-No se necesita cita previa. ¡Te esperamos!
-
+No se necesita cita previa. ¡Los dioses del estilo te esperan!

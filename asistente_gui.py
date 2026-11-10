@@ -56,8 +56,8 @@ COLOR_PLACEHOLDER = "#94a3b8"       # Gris claro para el texto de ayuda del inpu
 
 TEXTO_PLACEHOLDER = "Escribe tu pregunta aquí (ej: ¿Cuánto cuesta el tinte?)..."
 MENSAJE_BIENVENIDA = (
-    "💈 ¡Hola! Bienvenido/a a Peluquería Brillo Estelar ✨\n"
-    "Soy tu asistente virtual con IA. Puedes escribir tu consulta abajo o "
+    "🏛️ ¡Hola! Bienvenido/a a Peluquería Antigua Grecia ✨\n"
+    "Soy tu oráculo y asistente virtual con IA. Puedes escribir tu consulta abajo o "
     "pulsar uno de los botones rápidos para conocer nuestros servicios, precios y horarios."
 )
 
@@ -109,7 +109,7 @@ def consultar_asistente(pregunta_usuario, contexto_peluqueria):
     # - Definimos el rol estricto del asistente (solo responde sobre la peluquería).
     # - Inyectamos los datos reales de servicios.txt para evitar alucinaciones.
     # - Pedimos texto plano sin formato Markdown para que se lea limpio en Tkinter.
-    prompt = f"""Eres el asistente virtual oficial de la 'Peluquería Brillo Estelar'.
+    prompt = f"""Eres el asistente virtual oficial de la 'Peluquería Antigua Grecia'.
 Tu única función es responder las dudas de los clientes utilizando EXCLUSIVAMENTE la siguiente información oficial de la peluquería:
 
 --- INICIO DEL CONTEXTO DE LA PELUQUERÍA ---
@@ -119,7 +119,7 @@ Tu única función es responder las dudas de los clientes utilizando EXCLUSIVAME
 Reglas estrictas de comportamiento:
 1. Responde de forma amable, clara, breve y directa en español.
 2. Basa tus respuestas únicamente en los servicios, precios y horarios indicados en el contexto anterior. No inventes servicios ni precios.
-3. Si el usuario pregunta por algo que NO tiene relación con la peluquería o sus servicios (por ejemplo, historia, matemáticas, programación u otros temas generales), indícale educadamente que solo puedes responder consultas relacionadas con la Peluquería Brillo Estelar.
+3. Si el usuario pregunta por algo que NO tiene relación con la peluquería o sus servicios (por ejemplo, historia general fuera del salón, matemáticas, programación u otros temas generales), indícale educadamente que solo puedes responder consultas relacionadas con la Peluquería Antigua Grecia.
 4. Escribe la respuesta en texto plano (usa viñetas '•' para listas, pero NO uses asteriscos '**' de Markdown) para que se visualice limpia en la ventana de chat.
 
 Pregunta del cliente: {pregunta_usuario}
@@ -217,7 +217,7 @@ def limpiar_historial_chat(area_chat):
     area_chat.delete("1.0", tk.END)
     area_chat.config(state=tk.DISABLED)
     mostrar_mensaje_en_chat(
-        area_chat, "✨ Peluquería Brillo Estelar", MENSAJE_BIENVENIDA, tipo="bienvenida"
+        area_chat, "🏛️ Peluquería Antigua Grecia", MENSAJE_BIENVENIDA, tipo="bienvenida"
     )
 
 
@@ -266,7 +266,7 @@ def enviar_consulta(
         def actualizar_interfaz():
             mostrar_mensaje_en_chat(
                 area_chat,
-                "💬 Asistente Brillo Estelar",
+                "💬 Asistente Antigua Grecia",
                 respuesta_ia,
                 tipo="error" if es_error else "asistente",
             )
@@ -334,7 +334,7 @@ def iniciar_interfaz():
     contexto_peluqueria = cargar_contexto_servicios()
 
     ventana = tk.Tk()
-    ventana.title("Peluquería Brillo Estelar — Asistente Virtual IA")
+    ventana.title("Peluquería Antigua Grecia — Asistente Virtual IA")
     ventana.geometry("760x640")
     ventana.minsize(580, 480)
     ventana.configure(bg=COLOR_FONDO_APP)
@@ -350,7 +350,7 @@ def iniciar_interfaz():
 
     tk.Label(
         frame_titulos,
-        text="✂️ Peluquería Brillo Estelar ✨",
+        text="🏛️ Peluquería Antigua Grecia ✂️✨",
         font=("Segoe UI", 14, "bold"),
         bg=COLOR_CABECERA,
         fg="#ffffff",
