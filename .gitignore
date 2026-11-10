@@ -1,0 +1,12 @@
+# Variables de entorno (contiene la API Key secreta)
+.env
+
+# Entorno virtual y caché de Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Configuración local del editor
+.vscode/
+
