@@ -15,6 +15,9 @@ import google.generativeai as genai
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
+if API_KEY and API_KEY != "tu_clave_api_aqui":
+    genai.configure(api_key=API_KEY, transport="rest")
+
 
 # 2. LECTURA DEL ARCHIVO DE CONTEXTO (servicios.txt)
 def cargar_contexto():
@@ -55,21 +58,26 @@ Reglas:
 
 Pregunta del cliente: {pregunta}"""
 
-    try:
-        # Configuramos la conexión REST y el modelo de Gemini
-        genai.configure(api_key=API_KEY, transport="rest")
-        modelo = genai.GenerativeModel("gemini-3.6-flash")
-        respuesta = modelo.generate_content(prompt, request_options={"timeout": 12})
+    # Probamos en orden por si algún servidor corta la conexión (10054) o está saturado (503)
+    modelos = ["gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.1-flash-lite"]
+    ultimo_error = None
 
-        # Procesamos la respuesta en formato JSON para extraer solo el texto
-        datos_json = json.loads(json.dumps(respuesta.to_dict(), ensure_ascii=False))
-        texto = datos_json["candidates"][0]["content"]["parts"][0]["text"]
+    for nombre_modelo in modelos:
+        try:
+            modelo = genai.GenerativeModel(nombre_modelo)
+            respuesta = modelo.generate_content(prompt, request_options={"timeout": 12})
 
-        return texto.replace("**", "").strip()
+            # Procesamos la respuesta en formato JSON para extraer solo el texto
+            datos_json = json.loads(json.dumps(respuesta.to_dict(), ensure_ascii=False))
+            texto = datos_json["candidates"][0]["content"]["parts"][0]["text"]
 
-    except Exception as error:
-        # Si no hay internet o falla la API, avisamos sin cerrar el programa
-        return f"⚠️ Error de conexión con la API de Gemini: {error}"
+            return texto.replace("**", "").strip()
+        except Exception as error:
+            ultimo_error = error
+            continue
+
+    # Si fallan todos los intentos, avisamos al usuario sin cerrar el programa
+    return f"⚠️ Error de conexión con la API de Gemini: {ultimo_error}"
 
 
 # 4. FUNCIONES DE LA INTERFAZ GRÁFICA (TKINTER)
@@ -115,7 +123,7 @@ def enviar_pregunta(pregunta_rapida=None):
 
 def finalizar_respuesta(respuesta):
     """Muestra la respuesta de la IA en el chat y reactiva el botón de enviar."""
-    mostrar_mensaje("🏛️ Asistente Antigua Grecia:", respuesta, "asistente")
+    mostrar_mensaje("💬 Asistente Antigua Grecia:", respuesta, "asistente")
     boton_enviar.config(state=tk.NORMAL, text="Enviar ➤")
     entrada_usuario.focus()
 
@@ -126,7 +134,7 @@ def limpiar_chat():
     area_chat.delete("1.0", tk.END)
     area_chat.config(state=tk.DISABLED)
     mostrar_mensaje(
-        "🏛️ Peluquería Antigua Grecia ✨",
+        "🏺 Peluquería Antigua Grecia ✨",
         "¡Bienvenido/a! Escribe tu pregunta abajo o usa los botones rápidos para "
         "consultar nuestros servicios, precios y horarios.",
         "bienvenida",
@@ -150,7 +158,7 @@ cabecera.pack(fill=tk.X)
 
 tk.Label(
     cabecera,
-    text="🏛️ Peluquería Antigua Grecia ✂️✨",
+    text="🏺 Peluquería Antigua Grecia ✨",
     font=("Segoe UI", 13, "bold"),
     bg="#1e1b4b",
     fg="white",
